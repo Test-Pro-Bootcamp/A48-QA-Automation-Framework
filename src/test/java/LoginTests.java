@@ -12,7 +12,7 @@ public class LoginTests extends BaseTest {
     @Test
     public void loginEmailPasswordTest() throws InterruptedException {
 
-        String url = "https://qa.koel.app/#!/home";
+        String url = "https://testpro.io";
 
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
