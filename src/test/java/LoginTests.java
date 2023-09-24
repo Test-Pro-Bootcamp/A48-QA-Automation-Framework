@@ -7,7 +7,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
-
+// это еще одна попытка сделать нормально пуш
 public class LoginTests extends BaseTest {
     @Test
     public void loginEmailPasswordTest() throws InterruptedException {
