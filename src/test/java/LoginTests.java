@@ -101,5 +101,19 @@ public class LoginTests extends BaseTest {
 
         driver.quit();
     }
+    @Test
+    public void RegistrationNavigation() {
+        String url = "https://qa.koel.app/";
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--remote-allow-origins=*");
+        WebDriver webDriver = new ChromeDriver();
+        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        webDriver.get(url);
+        WebElement registrationButton = webDriver.findElement(By.cssSelector("a[href='registration']"));
+        registrationButton.click();
+        WebElement submitButton = webDriver.findElement(By.cssSelector("input#button"));
+        Assert.assertEquals(webDriver.getCurrentUrl(), "https://qa.koel.app/registration");
+        Assert.assertTrue(submitButton.isDisplayed());
+    }
 }
 
