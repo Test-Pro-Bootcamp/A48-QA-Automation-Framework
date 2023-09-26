@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="Login Test" thread-count="2" parallel="classes">
+<suite name="Regression test" thread-count="1" parallel="classes">
 
     <test name="Example Test" preserve-order="false">
         <classes>
             <class name="LoginTests"/>
             <class name="ProfileTest"/>
+            <class name="RegistrationTest"/>
         </classes>
     </test>
 
