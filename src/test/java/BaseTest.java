@@ -1,4 +1,5 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -11,7 +12,8 @@ import java.util.UUID;
 public abstract class BaseTest {
 
     WebDriver driver;
-    String url = "https://qa.koel.app/#!/home";
+    String prodUrl = "https://koel.dev/";
+    public static final String QA_URL = "https://qa.koel.app/#!/home";
 
     @BeforeSuite
     static void setupClass() {
@@ -19,7 +21,8 @@ public abstract class BaseTest {
     }
 
     @BeforeMethod
-    public void setup() {
+    @Parameters({"qaUrl"})
+    public void setup(String url) {
 
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
@@ -49,5 +52,17 @@ public abstract class BaseTest {
 
     public String generateName() {
         return UUID.randomUUID().toString().replace("-", "");
+    }
+
+    public void provideEmail(String email) {
+        WebElement emailField = getDriver().findElement(By.cssSelector("input[type='email']"));
+        clickToElement(emailField);
+        sendKeysToElement(emailField, email);
+    }
+
+    public void providePassword(String password) {
+        WebElement passwordField = getDriver().findElement(By.cssSelector("input[type='password']"));
+        clickToElement(passwordField);
+        sendKeysToElement(passwordField, password);
     }
 }
