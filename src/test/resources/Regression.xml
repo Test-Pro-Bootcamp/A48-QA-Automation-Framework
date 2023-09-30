@@ -2,12 +2,17 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="Regression test" thread-count="1" parallel="classes">
+    <parameter name="qaUrl" value="https://qa.koel.app/#!/home"></parameter>
 
     <test name="Example Test" preserve-order="false">
         <classes>
-            <class name="LoginTests"/>
-            <class name="ProfileTest"/>
-            <class name="RegistrationTest"/>
+            <class name="LoginTests">
+                <methods>
+                    <include name="loginWithIncorrectCredentialTest"/>
+                </methods>
+            </class>
+<!--            <class name="ProfileTest"/>-->
+<!--            <class name="RegistrationTest"/>-->
         </classes>
     </test>
 

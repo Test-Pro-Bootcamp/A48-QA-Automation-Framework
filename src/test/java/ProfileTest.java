@@ -7,14 +7,12 @@ public class ProfileTest extends BaseTest {
 
     @Test(testName = "Check updating profile's name")
     public void renameProfileTest() throws InterruptedException {
-        WebElement emailField = getDriver().findElement(By.cssSelector("input[type='email']"));
-        WebElement passwordField = getDriver().findElement(By.cssSelector("input[type='password']"));
+
         WebElement loginButton = getDriver().findElement(By.cssSelector("button[type='submit']"));
 
-        clickToElement(emailField);
-        sendKeysToElement(emailField, "demo@class.com");
-        clickToElement(passwordField);
-        sendKeysToElement(passwordField, "te$t$tudent");
+        provideEmail("demo@class.com");
+        providePassword("te$t$tudent");
+
         clickToElement(loginButton);
         Thread.sleep(5000);
 
