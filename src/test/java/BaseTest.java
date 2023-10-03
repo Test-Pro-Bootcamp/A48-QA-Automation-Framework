@@ -47,6 +47,7 @@ public abstract class BaseTest {
     }
 
     public void sendKeysToElement(WebElement element, String text) {
+        element.clear();
         element.sendKeys(text);
     }
 

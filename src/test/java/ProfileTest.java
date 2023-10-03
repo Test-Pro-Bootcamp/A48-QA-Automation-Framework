@@ -1,12 +1,18 @@
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import java.time.Duration;
 
 public class ProfileTest extends BaseTest {
 
     @Test(testName = "Check updating profile's name")
-    public void renameProfileTest() throws InterruptedException {
+    public void renameProfileTest() {
 
         WebElement loginButton = getDriver().findElement(By.cssSelector("button[type='submit']"));
 
@@ -14,7 +20,9 @@ public class ProfileTest extends BaseTest {
         providePassword("te$t$tudent");
 
         clickToElement(loginButton);
-        Thread.sleep(5000);
+
+        Wait<WebDriver> wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.invisibilityOf(loginButton));
 
         WebElement avatar = getDriver().findElement(By.cssSelector(".avatar"));
         clickToElement(avatar);
@@ -31,7 +39,8 @@ public class ProfileTest extends BaseTest {
         clickToElement(saveButton);
 
         getDriver().navigate().refresh();
-        Thread.sleep(5000);
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#inputProfileName")));
 
         inputProfileName = getDriver().findElement(By.cssSelector("#inputProfileName"));
         Assert.assertEquals(inputProfileName.getText(), newName);
