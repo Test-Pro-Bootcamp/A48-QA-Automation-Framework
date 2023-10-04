@@ -24,8 +24,8 @@ public class LoginTests extends BaseTest {
         providePassword(password);
 
         clickToElement(loginButton);
+        String newName = generateName();
 
-        Wait<WebDriver> wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".avatar")));
 
 
@@ -46,7 +46,6 @@ public class LoginTests extends BaseTest {
 
         clickToElement(loginButton);
 
-        Wait<WebDriver> wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOf(loginButton));
 
         Assert.assertTrue(loginButton.isDisplayed());

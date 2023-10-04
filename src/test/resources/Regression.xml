@@ -13,7 +13,9 @@
 <!--            </class>-->
 <!--            <class name="ProfileTest"/>-->
 <!--            <class name="RegistrationTest"/>-->
-            <class name="Homework"></class>
+<!--            <class name="Homework"></class>-->
+<!--            <class name="PlaySongTest"></class>-->
+            <class name="RenamePlayListTest"></class>
         </classes>
     </test>
 
