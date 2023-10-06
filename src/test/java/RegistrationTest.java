@@ -6,26 +6,25 @@ import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pom.LoginPage;
+import pom.RegistrationPage;
 
 import java.time.Duration;
 
 public class RegistrationTest extends BaseTest {
+    LoginPage loginPage;
+    RegistrationPage registrationPage;
 
     @Test
     public void registrationWithNonApproveEmailTest() {
-        WebElement registrationButton = getDriver().findElement(By.xpath("//div/a[contains(text(), 'Registration')]"));
+        loginPage = new LoginPage(getDriver());
+        registrationPage = new RegistrationPage(getDriver());
 
-        clickToElement(registrationButton);
+        loginPage.clickToRegistrationButton();
 
-        Wait<WebDriver> wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[name='email']")));
 
-        WebElement registrationEmailInput = getDriver().findElement(By.cssSelector("input[name='email']"));
-        WebElement submitRegistrationButton = getDriver().findElement(By.cssSelector("#button"));
-
-        clickToElement(registrationEmailInput);
-        sendKeysToElement(registrationEmailInput, "nonApproveEmail@gmaul.com");
-        clickToElement(submitRegistrationButton);
+        registrationPage.inputEmailForRegistration("nonApproveEmail@gmaul.com");
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".errors")));
 

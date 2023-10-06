@@ -14,7 +14,7 @@ import java.util.UUID;
 
 public abstract class BaseTest {
 
-    WebDriver driver;
+    private WebDriver driver = null;
     String prodUrl = "https://koel.dev/";
     Actions actions;
     Wait<WebDriver> wait;
@@ -51,28 +51,9 @@ public abstract class BaseTest {
         getDriver().quit();
     }
 
-    public void clickToElement(WebElement element) {
-        element.click();
-    }
-
-    public void sendKeysToElement(WebElement element, String text) {
-        element.clear();
-        element.sendKeys(text);
-    }
 
     public String generateName() {
         return UUID.randomUUID().toString().replace("-", "");
     }
 
-    public void provideEmail(String email) {
-        WebElement emailField = getDriver().findElement(By.cssSelector("input[type='email']"));
-        clickToElement(emailField);
-        sendKeysToElement(emailField, email);
-    }
-
-    public void providePassword(String password) {
-        WebElement passwordField = getDriver().findElement(By.cssSelector("input[type='password']"));
-        clickToElement(passwordField);
-        sendKeysToElement(passwordField, password);
-    }
 }

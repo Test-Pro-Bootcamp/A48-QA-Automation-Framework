@@ -3,19 +3,21 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pom.LoginPage;
 
 import java.awt.*;
 
 public class RenamePlayListTest extends BaseTest {
 
+    LoginPage loginPage = new LoginPage(getDriver());
     @Test
     public void renamePlayListTest() {
         WebElement loginButton = getDriver().findElement(By.cssSelector("button[type='submit']"));
 
-        provideEmail("demo@class.com");
-        providePassword("te$t$tudent");
+        loginPage.provideEmail("demo@class.com");
+        loginPage.providePassword("te$t$tudent");
 
-        clickToElement(loginButton);
+        loginPage.clickToElement(loginButton);
 
         WebElement playList = getDriver().findElement(By.xpath("//li[contains(@class, 'playlist')][3]"));
 
