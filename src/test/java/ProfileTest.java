@@ -6,43 +6,35 @@ import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pom.LoginPage;
+import pom.ProfilePage;
 
 import java.time.Duration;
 
 public class ProfileTest extends BaseTest {
+    LoginPage loginPage;
+    ProfilePage profilePage;
 
     @Test(testName = "Check updating profile's name")
     public void renameProfileTest() {
+        loginPage = new LoginPage(getDriver());
+        profilePage = new ProfilePage(getDriver());
+        String newName = generateName();
 
         WebElement loginButton = getDriver().findElement(By.cssSelector("button[type='submit']"));
 
-        provideEmail("demo@class.com");
-        providePassword("te$t$tudent");
+        loginPage.provideEmail("demo@class.com");
+        loginPage.providePassword("te$t$tudent");
+        loginPage.clickLoginButton();
 
-        clickToElement(loginButton);
-
-        Wait<WebDriver> wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
         wait.until(ExpectedConditions.invisibilityOf(loginButton));
 
-        WebElement avatar = getDriver().findElement(By.cssSelector(".avatar"));
-        clickToElement(avatar);
-
-        WebElement inputProfileName = getDriver().findElement(By.cssSelector("#inputProfileName"));
-        clickToElement(inputProfileName);
-        String newName = generateName();
-        sendKeysToElement(inputProfileName, newName);
-
-        WebElement currentPasswordField = getDriver().findElement(By.cssSelector("#inputProfileCurrentPassword"));
-        clickToElement(currentPasswordField);
-        sendKeysToElement(currentPasswordField, "te$t$tudent");
-        WebElement saveButton = getDriver().findElement(By.cssSelector(".btn-submit"));
-        clickToElement(saveButton);
+        profilePage.renameProfile(newName);
 
         getDriver().navigate().refresh();
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#inputProfileName")));
 
-        inputProfileName = getDriver().findElement(By.cssSelector("#inputProfileName"));
-        Assert.assertEquals(inputProfileName.getText(), newName);
+        Assert.assertEquals(profilePage.findWebElement(By.cssSelector("#inputProfileName")).getText(), newName);
     }
 }
