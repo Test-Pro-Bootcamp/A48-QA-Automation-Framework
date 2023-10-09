@@ -3,19 +3,39 @@ package pom;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
 public class PlaySongPage extends BasePage {
+
+    @FindBy(css = "[class='song-item']")
+    List<WebElement> songs;
+
+    @FindBy(css = "[class='playback']")
+    WebElement playButtonByContextMenu;
+
+    @FindBy(css = "[data-testid='sound-bar-play']")
+    WebElement soundBar;
 
     public PlaySongPage(WebDriver driver) {
         super(driver);
     }
 
     public void playSong() {
-        List<WebElement> songs = findWebElements(By.cssSelector("[class='song-item']"));
         actions.contextClick(songs.get(0)).perform();
-        WebElement playButtonByContextMenu = findWebElement(By.cssSelector("[class='playback']"));
         clickToElement(playButtonByContextMenu);
+    }
+
+    public void waitUntilSongBarDisplayed() {
+        waiUntilWebElementDisplayed(soundBar);
+    }
+
+    public boolean isSongBarDisplayed() {
+        return soundBar.isDisplayed();
+    }
+
+    public int getSongsCount() {
+        return songs.size();
     }
 }

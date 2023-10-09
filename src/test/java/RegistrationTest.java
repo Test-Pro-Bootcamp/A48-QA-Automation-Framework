@@ -26,10 +26,8 @@ public class RegistrationTest extends BaseTest {
 
         registrationPage.inputEmailForRegistration("nonApproveEmail@gmaul.com");
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".errors")));
-
-        WebElement errorMessage = getDriver().findElement(By.cssSelector(".errors"));
-        Assert.assertEquals(errorMessage.getText(), "Sorry, only certain emails are allowed, please do not use your personal email");
+        registrationPage.waitUntilErrorMessageDisplayed();
+        Assert.assertEquals(registrationPage.getErrorMessageText(), "Sorry, only certain emails are allowed, please do not use your personal email");
 
     }
 }

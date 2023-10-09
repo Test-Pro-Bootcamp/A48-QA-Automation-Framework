@@ -24,12 +24,9 @@ public class PlaySongTest extends BaseTest {
         getDriver().get("https://qa.koel.app/#!/songs");
 
         playSongPage.playSong();
+        playSongPage.waitUntilSongBarDisplayed();
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[data-testid='sound-bar-play']")));
-
-        WebElement soundBar = getDriver().findElement(By.cssSelector("[data-testid='sound-bar-play']"));
-
-        Assert.assertTrue(soundBar.isDisplayed());
-        Assert.assertEquals(playSongPage.findWebElements(By.cssSelector("[class='song-item']")).size(), 66);
+        Assert.assertTrue(playSongPage.isSongBarDisplayed());
+        Assert.assertEquals(playSongPage.getSongsCount(), 66);
     }
 }

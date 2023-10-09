@@ -1,34 +1,54 @@
 package pom;
 
+import org.apache.commons.logging.Log;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 public class LoginPage extends BasePage {
+
+    @FindBy(css = "button[type='submit']")
+    WebElement loginButton;
+
+    @FindBy(css = "input[type='email']")
+    WebElement emailField;
+
+    @FindBy(css = "input[type='password']")
+    WebElement passwordField;
+
+    @FindBy(xpath = "//div/a[contains(text(), 'Registration')]")
+    WebElement registrationButton;
 
     public LoginPage(WebDriver driver) {
         super(driver);
     }
 
-    public void provideEmail(String email) {
-        WebElement emailField = findWebElement(By.cssSelector("input[type='email']"));
+    public LoginPage provideEmail(String email) {
         clickToElement(emailField);
         sendKeysToElement(emailField, email);
+        return this;
     }
 
-    public void providePassword(String password) {
-        WebElement passwordField = findWebElement(By.cssSelector("input[type='password']"));
+    public LoginPage providePassword(String password) {
         clickToElement(passwordField);
         sendKeysToElement(passwordField, password);
+        return this;
     }
 
     public void clickLoginButton() {
-        WebElement loginButton = findWebElement(By.cssSelector("button[type='submit']"));
         clickToElement(loginButton);
     }
 
     public void clickToRegistrationButton() {
-        WebElement registrationButton = findWebElement(By.xpath("//div/a[contains(text(), 'Registration')]"));
         clickToElement(registrationButton);
+    }
+
+    public boolean isLoginButtonDisplayed() {
+        return loginButton.isDisplayed();
+    }
+
+    public void waitUntilLoginButtonDisplayed() {
+        waiUntilWebElementDisplayed(loginButton);
     }
 }

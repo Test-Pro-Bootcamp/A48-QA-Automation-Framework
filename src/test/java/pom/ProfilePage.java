@@ -3,20 +3,36 @@ package pom;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 public class ProfilePage extends BasePage {
+
+    @FindBy(css = "#inputProfileName")
+    WebElement inputProfileName;
+
+    @FindBy(css = "#inputProfileCurrentPassword")
+    WebElement currentPasswordField;
+
+    @FindBy(css = ".btn-submit")
+    WebElement saveButton;
 
     public ProfilePage(WebDriver driver) {
         super(driver);
     }
 
     public void renameProfile(String newName) {
-        WebElement inputProfileName = findWebElement(By.cssSelector("#inputProfileName"));
         clickToElement(inputProfileName);
         sendKeysToElement(inputProfileName, newName);
-        WebElement currentPasswordField = findWebElement(By.cssSelector("#inputProfileCurrentPassword"));
         clickToElement(currentPasswordField);
         sendKeysToElement(currentPasswordField, "te$t$tudent");
-        WebElement saveButton = findWebElement(By.cssSelector(".btn-submit"));
         clickToElement(saveButton);
-    }}
+    }
+
+    public void waitUntilProfileInputDisplayed() {
+        waiUntilWebElementDisplayed(inputProfileName);
+    }
+
+    public String getProfileNameText() {
+        return inputProfileName.getText();
+    }
+}

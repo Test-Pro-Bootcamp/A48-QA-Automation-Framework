@@ -3,30 +3,28 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pom.HomePage;
 import pom.LoginPage;
 
 import java.awt.*;
 
 public class RenamePlayListTest extends BaseTest {
 
-    LoginPage loginPage = new LoginPage(getDriver());
+    LoginPage loginPage;
+    HomePage homePage;
+
     @Test
     public void renamePlayListTest() {
-        WebElement loginButton = getDriver().findElement(By.cssSelector("button[type='submit']"));
+        loginPage = new LoginPage(getDriver());
+        homePage = new HomePage(getDriver());
 
         loginPage.provideEmail("demo@class.com");
         loginPage.providePassword("te$t$tudent");
-
-        loginPage.clickToElement(loginButton);
-
-        WebElement playList = getDriver().findElement(By.xpath("//li[contains(@class, 'playlist')][3]"));
+        loginPage.clickLoginButton();
 
         String newName = generateName();
-        actions.doubleClick(playList).perform();
-        playList.sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.BACK_SPACE));
-        playList.sendKeys(newName);
-        playList.sendKeys(Keys.ENTER);
+        homePage.renamePlayList(newName);
 
-        Assert.assertEquals(playList.getText(), newName);
+        Assert.assertEquals(homePage.getPlayListName(), newName);
     }
 }
