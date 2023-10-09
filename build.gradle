@@ -22,16 +22,17 @@ test {
 }
 
 task regressionTests (type:Test){
-    test {
         useTestNG() {
             suites "src/test/resources/Regression.xml"
         }
-    }
 }
 task homework18(type: Test) {
-    test {
         useTestNG() {
             suites "src/test/resources/Homework18.xml"
         }
+    }
+task profileTest(type: Test) {
+    useTestNG() {
+        suites "src/test/resources/ProfileTest.xml"
     }
 }
