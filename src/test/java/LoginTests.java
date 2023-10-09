@@ -1,3 +1,4 @@
+import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -10,27 +11,39 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
+import pom.HomePage;
 import pom.LoginPage;
 
 import java.time.Duration;
 
 public class LoginTests extends BaseTest {
+
     LoginPage loginPage;
+    HomePage homePage;
 
     @Test(dataProvider = "loginParameters", dataProviderClass = DataProviderClass.class)
     public void loginEmailPasswordTest(String email, String password) {
         loginPage = new LoginPage(getDriver());
-        String newName = generateName();
+        homePage = new HomePage(getDriver());
 
-        loginPage.provideEmail(email);
-        loginPage.providePassword(password);
-        loginPage.clickLoginButton();
+        loginPage.provideEmail(email)
+                .providePassword(password)
+                .clickLoginButton();
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".avatar")));
+        homePage.waitUntilAvatarDisplayed();
 
-        Assert.assertEquals(getDriver().getCurrentUrl(), QA_URL);
-        Assert.assertTrue(getDriver().findElement(By.cssSelector(".avatar")).isDisplayed());
-        Assert.assertFalse(loginPage.findWebElement(By.cssSelector("button[type='submit']")).isDisplayed());
+        SoftAssertions.assertSoftly(a -> {
+            a.assertThat(getDriver().getCurrentUrl()).isEqualTo(QA_URL).as("Urls are not equal");
+            a.assertThat(homePage.isAvatarDisplayed()).isTrue().as("Avatar is not displayed");
+            a.assertThat(loginPage.isLoginButtonDisplayed()).isTrue().as("Login button is not displayed");
+        });
+
+//        SoftAssert softAssert = new SoftAssert();
+//        softAssert.assertEquals(getDriver().getCurrentUrl(), QA_URL);
+//        softAssert.assertTrue(homePage.isAvatarDisplayed());
+//        softAssert.assertTrue(loginPage.isLoginButtonDisplayed());
+//        softAssert.assertAll();
     }
 
     @Test(dataProvider = "incorrectCredentials", dataProviderClass = DataProviderClass.class)
@@ -40,9 +53,8 @@ public class LoginTests extends BaseTest {
         loginPage.providePassword(password);
         loginPage.clickLoginButton();
 
-        wait.until(ExpectedConditions.visibilityOf(loginPage.findWebElement(By.cssSelector("button[type='submit']"))));
+        loginPage.waitUntilLoginButtonDisplayed();
 
-        Assert.assertTrue(loginPage.findWebElement(By.cssSelector("button[type='submit']")).isDisplayed());
+        Assert.assertTrue(loginPage.isLoginButtonDisplayed());
     }
 }
-

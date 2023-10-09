@@ -33,8 +33,7 @@ public class ProfileTest extends BaseTest {
 
         getDriver().navigate().refresh();
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#inputProfileName")));
-
-        Assert.assertEquals(profilePage.findWebElement(By.cssSelector("#inputProfileName")).getText(), newName);
+        profilePage.waitUntilProfileInputDisplayed();
+        Assert.assertEquals(profilePage.getProfileNameText(), newName);
     }
 }

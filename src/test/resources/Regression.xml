@@ -6,15 +6,14 @@
 
     <test name="Example Test" preserve-order="false">
         <classes>
-<!--            <class name="LoginTests">-->
-<!--                <methods>-->
-<!--                    <include name="loginWithIncorrectCredentialTest"/>-->
-<!--                </methods>-->
-<!--            </class>-->
+            <class name="LoginTests">
+                <methods>
+                    <include name="loginEmailPasswordTest"/>
+                </methods>
+            </class>
 <!--            <class name="ProfileTest"/>-->
 <!--            <class name="RegistrationTest"/>-->
-<!--            <class name="Homework"></class>-->
-            <class name="PlaySongTest"></class>
+<!--            <class name="PlaySongTest"></class>-->
 <!--            <class name="RenamePlayListTest"></class>-->
         </classes>
     </test>
