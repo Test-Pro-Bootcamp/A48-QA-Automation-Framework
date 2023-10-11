@@ -5,16 +5,15 @@
     <parameter name="qaUrl" value="https://qa.koel.app/#!/home"></parameter>
 
     <test name="Example Test" preserve-order="false">
+        <packages>
+            <package name="api.test"/>
+        </packages>
         <classes>
-            <class name="LoginTests">
-                <methods>
-                    <include name="loginEmailPasswordTest"/>
-                </methods>
-            </class>
-<!--            <class name="ProfileTest"/>-->
-<!--            <class name="RegistrationTest"/>-->
-<!--            <class name="PlaySongTest"></class>-->
-<!--            <class name="RenamePlayListTest"></class>-->
+            <class name="LoginTests"/>
+            <class name="ProfileTest"/>
+            <class name="RegistrationTest"/>
+            <class name="PlaySongTest"/>
+            <class name="RenamePlayListTest"/>
         </classes>
     </test>
 
