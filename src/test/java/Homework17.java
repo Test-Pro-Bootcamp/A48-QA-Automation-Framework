@@ -6,18 +6,20 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
 
 public class Homework17 extends BaseTest {
    @Test
-   public void addSongToPlaylist () throws InterruptedException{
+   @Parameters({"qaUrl"})
+   public void addSongToPlaylist (String qaUrl) throws InterruptedException{
        ChromeOptions options = new ChromeOptions();
        options.addArguments("--remote-allow-origins=*");
        WebDriver driver = new ChromeDriver(options);
        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-       driver.get(url);
+       driver.get(qaUrl);
        WebElement emailField = driver.findElement(By.cssSelector("[type='email']")) ;
        WebElement passwordField = driver.findElement(By.cssSelector("[type='password']")) ;
        WebElement loginButton = driver.findElement(By.cssSelector("[type='submit']")) ;

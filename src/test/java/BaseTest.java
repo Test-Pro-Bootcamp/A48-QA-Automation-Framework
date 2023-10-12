@@ -1,4 +1,5 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -7,13 +8,14 @@ import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Parameters;
 
 import javax.swing.*;
 import java.time.Duration;
 import java.util.UUID;
 
 public abstract class BaseTest {
-    String url = "https://qa.koel.app/";
+  //  String qaUrl = "https://qa.koel.app/";
     String userEmail = "iana.kocharian@testpro.io";
     String userPassword = "CwqOPgQw";
     WebDriver driver;
@@ -25,7 +27,8 @@ public abstract class BaseTest {
         WebDriverManager.chromedriver().setup();
     }
     @BeforeMethod
-    public void setup(){
+    @Parameters({"qaUrl"})
+    public void setup(String url){
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
 
@@ -51,4 +54,15 @@ public abstract class BaseTest {
     public String generateName(){
         return UUID.randomUUID().toString().replace("-", " ");
     }
+    public void provideEmail(String email){
+        WebElement emailField = getDriver().findElement(By.cssSelector("input[type='email']"));
+        clickToElement(emailField);
+        sendKeyToElement(emailField, email);
+    }
+    public void providePassword(String password){
+        WebElement passwordField = getDriver().findElement(By.cssSelector("input[type='password']"));
+        clickToElement(passwordField);
+        sendKeyToElement(passwordField,password);
+    }
+
 }
