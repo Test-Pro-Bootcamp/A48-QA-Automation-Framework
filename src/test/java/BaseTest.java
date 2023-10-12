@@ -14,6 +14,7 @@ import org.testng.annotations.*;
 
 import java.net.MalformedURLException;
 import java.net.URI;
+import java.net.URL;
 import java.time.Duration;
 import java.util.UUID;
 
@@ -80,5 +81,22 @@ public abstract class BaseTest {
                 driver = new SafariDriver();
                 return driver;
         }
+    }
+
+    public WebDriver getLambdaDriver() throws MalformedURLException {
+        String userName = "";
+        String authKey = "";
+        String hub = "@hub.lambdatest.com/wd/hub";
+
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability("platform", "Windows 10");
+        capabilities.setCapability("browserName", "Chrome");
+        capabilities.setCapability("version", "106.0");
+        capabilities.setCapability("resolution", "1024x768");
+        capabilities.setCapability("build", "TestNG With Java");
+        capabilities.setCapability("name", this.getClass().getName());
+        capabilities.setCapability("plugin", "git-testng");
+
+        return new RemoteWebDriver(new URL("https://" + userName + ":" + authKey + hub), capabilities);
     }
 }
