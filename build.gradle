@@ -15,7 +15,7 @@ ext {
 
 dependencies {
     testImplementation 'org.testng:testng:7.6.1'
-    implementation 'org.seleniumhq.selenium:selenium-java:4.13.0'
+    implementation 'org.seleniumhq.selenium:selenium-java:4.5.0'
     testImplementation 'io.github.bonigarcia:webdrivermanager:5.4.1'
     testImplementation 'org.assertj:assertj-core:3.24.2'
 }
@@ -28,7 +28,8 @@ test {
 
 task regressionTest(type: Test) {
     useTestNG() {
-        suites "src/test/resources/Regression.xml"
+        systemProperty "suite", System.getProperty("suite", suite)
+        suites "src/test/resources/${suite}.xml"
         //add possibility to choose browser
         systemProperty "browser", System.getProperty("browser")
     }

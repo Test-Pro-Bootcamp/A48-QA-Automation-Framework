@@ -24,23 +24,24 @@ public abstract class BaseTest {
     String prodUrl = "https://koel.dev/";
     Actions actions;
     Wait<WebDriver> wait;
+    private static final ThreadLocal<WebDriver> TREAD_LOCAL_DRIVER = new ThreadLocal<>();
     public static final String QA_URL = "https://qa.koel.app/#!/home";
 
     @BeforeMethod
     @Parameters({"qaUrl"})
     public void setup(String url) throws MalformedURLException {
+        TREAD_LOCAL_DRIVER.set(pickDriver(System.getProperty("browser")));
 
-        pickDriver(System.getProperty("browser"));
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        TREAD_LOCAL_DRIVER.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 
-        actions = new Actions(driver);
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        actions = new Actions(TREAD_LOCAL_DRIVER.get());
+        wait = new WebDriverWait(TREAD_LOCAL_DRIVER.get(), Duration.ofSeconds(10));
 
-        driver.get(url);
+        TREAD_LOCAL_DRIVER.get().get(url);
     }
 
     public WebDriver getDriver() {
-        return driver;
+        return TREAD_LOCAL_DRIVER.get();
     }
 
     @AfterMethod
@@ -76,6 +77,8 @@ public abstract class BaseTest {
                 desiredCapabilities.setCapability("browserName", "firefox");
                 driver = new RemoteWebDriver(URI.create(gridUrl).toURL(), desiredCapabilities);
                 return driver;
+            case "lambda-test":
+                return getLambdaDriver();
             default:
                 WebDriverManager.safaridriver().setup();
                 driver = new SafariDriver();
@@ -84,8 +87,8 @@ public abstract class BaseTest {
     }
 
     public WebDriver getLambdaDriver() throws MalformedURLException {
-        String userName = "";
-        String authKey = "";
+        String userName = "tanike18";
+        String authKey = "od7Dpt7s6GOhymogN1LAlpyjV9Vc3zFZKCZuA15QdaOaFw7lFw";
         String hub = "@hub.lambdatest.com/wd/hub";
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
