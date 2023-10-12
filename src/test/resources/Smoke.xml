@@ -3,12 +3,9 @@
 
 <suite name="Smoke test" thread-count="1" parallel="classes">
 <parameter name="qaUrl" value="https://qa.koel.app/#!/home"></parameter>
-    <test name="Example Test" preserve-order="false">
+    <test name="Example Test" preserve-order="false" parallel="methods" thread-count="2">
         <classes>
             <class name="LoginTests">
-            <methods>
-                <include name="loginEmailPasswordTest"/>
-            </methods>
             </class>
 <!--            <class name="ProfileTest"/>-->
         </classes>

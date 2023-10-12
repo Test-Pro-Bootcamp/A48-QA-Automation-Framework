@@ -5,9 +5,6 @@
     <parameter name="qaUrl" value="https://qa.koel.app/#!/home"></parameter>
 
     <test name="Example Test" preserve-order="false">
-        <packages>
-            <package name="api.test"/>
-        </packages>
         <classes>
             <class name="LoginTests"/>
             <class name="ProfileTest"/>
