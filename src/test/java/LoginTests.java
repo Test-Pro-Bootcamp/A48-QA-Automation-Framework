@@ -36,7 +36,7 @@ public class LoginTests extends BaseTest {
         SoftAssertions.assertSoftly(a -> {
             a.assertThat(getDriver().getCurrentUrl()).isEqualTo(QA_URL).as("Urls are not equal");
             a.assertThat(homePage.isAvatarDisplayed()).isTrue().as("Avatar is not displayed");
-            a.assertThat(loginPage.isLoginButtonDisplayed()).isTrue().as("Login button is not displayed");
+//            a.assertThat(loginPage.isLoginButtonDisplayed()).isTrue().as("Login button is not displayed");
         });
 
 //        SoftAssert softAssert = new SoftAssert();

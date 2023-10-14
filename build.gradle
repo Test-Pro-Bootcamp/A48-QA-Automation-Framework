@@ -37,7 +37,8 @@ task regressionTest(type: Test) {
 
 task smokeTest(type: Test){
     useTestNG() {
-        suites "src/test/resources/Smoke.xml"
+        systemProperty "suite", System.getProperty("suite", suite)
+        suites "src/test/resources/${suite}.xml"
         //add possibility to choose browser
         systemProperty "browser", System.getProperty("browser")
     }

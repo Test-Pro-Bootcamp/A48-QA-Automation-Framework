@@ -3,7 +3,7 @@
 
 <suite name="Smoke test" thread-count="1" parallel="classes">
 <parameter name="qaUrl" value="https://qa.koel.app/#!/home"></parameter>
-    <test name="Example Test" preserve-order="false" parallel="methods" thread-count="2">
+    <test name="Example Test" preserve-order="false" parallel="methods" thread-count="1">
         <classes>
             <class name="LoginTests">
             </class>
