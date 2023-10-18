@@ -15,6 +15,9 @@ public class PlaySongPage extends BasePage {
     @FindBy(css = "[class='playback']")
     WebElement playButtonByContextMenu;
 
+    @FindBy(css = "[title='Play or resume']")
+    WebElement playPauseButton;
+
     @FindBy(css = "[data-testid='sound-bar-play']")
     WebElement soundBar;
 
@@ -25,6 +28,14 @@ public class PlaySongPage extends BasePage {
     public void playSong() {
         actions.contextClick(songs.get(0)).perform();
         clickToElement(playButtonByContextMenu);
+    }
+
+    public void startPlaySong() {
+        // WebElement buttonPlayOrResume = driver.findElement(By.cssSelector("[title='Play or resume']"));
+        actions
+                .moveToElement(playPauseButton)
+                .perform();
+        playPauseButton.click();
     }
 
     public void waitUntilSongBarDisplayed() {
