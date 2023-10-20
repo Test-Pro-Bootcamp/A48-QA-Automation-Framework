@@ -6,15 +6,16 @@
     </parameter>
     <test name="Example Test" preserve-order="false">
         <classes>
-            <class name="LoginTests">
-                <methods>
-                    <include name="loginWithNotExistEmailTest"/>
-                    <include name="loginWithoutPasswordlTest"/>
-                </methods>
-            </class>
+            <class name="LoginTests"/>
+            <!--                <methods>-->
+            <!--                    <include name="loginWithNotExistEmailTest"/>-->
+            <!--                    <include name="loginWithoutPasswordlTest"/>-->
+            <!--                </methods>-->
+            <!--            </class>-->
             <class name="BaseTest"/>
-            <class name="Homework17"/>
-            <class name="DataProviderClass"/>
+            <!--            <class name="Homework17"/>-->
+            <class name="Test19"/>
+            <!--            <class name="DataProviderClass"/>-->
         </classes>
     </test>
 </suite>

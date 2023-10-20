@@ -6,7 +6,6 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-
 import java.time.Duration;
 
 public class Homework16 extends BaseTest {
@@ -26,4 +25,5 @@ public class Homework16 extends BaseTest {
         Assert.assertTrue(submitButton.isDisplayed());
         webDriver.quit();
     }
+
 }

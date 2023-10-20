@@ -31,13 +31,14 @@ task homework18(type: Test) {
         suites "src/test/resources/Homework18.xml"
     }
 }
+task Homework19(type: Test) {
+    useTestNG() {
+        suites "src/test/resources/Regression.xml"
+    }
+}
 task profileTest(type: Test) {
     useTestNG() {
         suites "src/test/resources/ProfileTest.xml"
     }
-    task dataProviderClass(type: Test) {
-        useTestNG() {
-            suites "src/test/resources/Smoke.xml"
-        }
-    }
+
 }
