@@ -31,8 +31,10 @@ public class Test19 extends BaseTest {
         Thread.sleep(3000);
         driver.navigate().refresh();
         Thread.sleep(5000);
-        Assert.assertFalse(playList.isDisplayed());
-        //Assert.assertFalse(playList.isSelected());
+        Assert.assertFalse(isDisplayed(By.xpath("//a[text()='test1']")));
+        // Assert.assertFalse(getDriver().findElement(By.xpath("//a[text()='test1']")).isDisplayed());
+        //Assert.assertFalse(playList.isDisplayed());
+
     }
 
 }

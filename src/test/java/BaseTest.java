@@ -12,6 +12,7 @@ import org.testng.annotations.Parameters;
 
 import javax.swing.*;
 import java.time.Duration;
+import java.util.NoSuchElementException;
 import java.util.UUID;
 
 public abstract class BaseTest {
@@ -70,5 +71,13 @@ public abstract class BaseTest {
         WebElement passwordField = getDriver().findElement(By.cssSelector("input[type='password']"));
         clickToElement(passwordField);
         sendKeyToElement(passwordField, password);
+    }
+    public boolean isDisplayed(By locator) {
+        try {
+            driver.findElement(locator);
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+        return true;
     }
 }
