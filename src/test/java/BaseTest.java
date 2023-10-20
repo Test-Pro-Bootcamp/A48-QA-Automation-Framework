@@ -21,6 +21,7 @@ public abstract class BaseTest {
     WebDriver driver;
     Actions actions;
 
+
     @BeforeSuite
     static void setupClass() {
         WebDriverManager.chromedriver().setup();
