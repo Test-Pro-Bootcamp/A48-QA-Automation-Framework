@@ -2,6 +2,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -18,23 +19,16 @@ public class Test19 extends BaseTest {
         clickToElement(newPlaylistButton);
         WebElement inputField = driver.findElement(By.cssSelector("input[placeholder='↵ to save']"));
         inputField.sendKeys("test1");
-        Actions actions = new Actions(driver);
         actions.sendKeys(inputField, Keys.RETURN).perform();
         WebElement playList = driver.findElement(By.xpath("//a[text()='test1']"));
         actions.contextClick(playList).perform();
         WebElement deleteSongButton = driver.findElement(By.xpath("//li[contains(@data-testid, 'playlist-context-menu-delete')]"));
         clickToElement(deleteSongButton);
-        //WebElement submitDeleteButton = driver.findElement(By.cssSelector("nav button[class='ok']"));
-        //clickToElement(submitDeleteButton);
         WebElement successNotify = driver.findElement(By.cssSelector("div[class='success show']"));
         Assert.assertTrue(successNotify.isDisplayed());
         Thread.sleep(3000);
         driver.navigate().refresh();
-        Thread.sleep(5000);
         Assert.assertFalse(isDisplayed(By.xpath("//a[text()='test1']")));
-        // Assert.assertFalse(getDriver().findElement(By.xpath("//a[text()='test1']")).isDisplayed());
-        //Assert.assertFalse(playList.isDisplayed());
-
     }
 
 }

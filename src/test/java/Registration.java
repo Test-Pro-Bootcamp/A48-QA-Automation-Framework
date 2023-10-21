@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 
 public class Registration extends BaseTest {
     @Test
-    @Parameters ({"qaUrl"})
+    @Parameters({"qaUrl"})
     public void RegistrationNavigation(String qaUrl) {
         WebElement registrationButton = getDriver().findElement(By.cssSelector("a[href='registration']"));
         registrationButton.click();

@@ -5,12 +5,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
 
-import javax.swing.*;
 import java.time.Duration;
 import java.util.NoSuchElementException;
 import java.util.UUID;
@@ -21,7 +21,7 @@ public abstract class BaseTest {
     String userPassword = "CwqOPgQw";
     WebDriver driver;
     Actions actions;
-
+    WebDriverWait wait;
 
     @BeforeSuite
     static void setupClass() {
@@ -36,8 +36,10 @@ public abstract class BaseTest {
 
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-
         driver.get(url);
+
+        wait = new WebDriverWait(driver, Duration.ofSeconds(7));
+        actions = new Actions(driver);
     }
 
     public WebDriver getDriver() {
@@ -72,12 +74,14 @@ public abstract class BaseTest {
         clickToElement(passwordField);
         sendKeyToElement(passwordField, password);
     }
+
     public boolean isDisplayed(By locator) {
         try {
             driver.findElement(locator);
-        } catch (NoSuchElementException e) {
+            return true;
+        } catch (org.openqa.selenium.NoSuchElementException e) {
             return false;
         }
-        return true;
     }
+
 }

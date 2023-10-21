@@ -1,18 +1,14 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import java.time.Duration;
-
 public class Homework17 extends BaseTest {
     @Test
     @Parameters({"qaUrl"})
-    public void addSongToPlaylist(String qaUrl) throws InterruptedException {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(7));
+    public void addSongToPlaylist(String qaUrl) {
         WebElement loginButton = driver.findElement(By.cssSelector("[type='submit']"));
         provideEmail("iana.kocharian@testpro.io");
         providePassword("CwqOPgQw");
