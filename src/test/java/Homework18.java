@@ -14,7 +14,7 @@ import java.time.Duration;
 public class Homework18 extends BaseTest {
     @Test
     @Parameters({"qaUrl"})
-    public void playSong(String qaUrl) throws InterruptedException {
+    public void playSong(String qaUrl) {
 
         WebElement loginButton = driver.findElement(By.cssSelector("[type='submit']"));
         provideEmail("iana.kocharian@testpro.io");
@@ -27,7 +27,6 @@ public class Homework18 extends BaseTest {
         WebElement anySong = driver.findElement(By.cssSelector("table tr[draggable='true']"));
         Actions action = new Actions(driver);
         action.doubleClick(anySong).perform();
-        Thread.sleep(5000);
         WebElement soundBar = driver.findElement(By.cssSelector("div [data-test='soundbars']"));
         wait.until(ExpectedConditions.visibilityOf(soundBar));
         Assert.assertTrue(soundBar.isDisplayed());

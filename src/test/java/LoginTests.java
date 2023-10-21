@@ -1,7 +1,7 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
@@ -13,8 +13,8 @@ public class LoginTests extends BaseTest {
         providePassword("te$t$tudent");
         WebElement loginButton = getDriver().findElement(By.cssSelector("button[type='submit']"));
         clickToElement(loginButton);
-        Thread.sleep(5000);
         WebElement avatar = getDriver().findElement(By.cssSelector(".avatar"));
+        wait.until(ExpectedConditions.visibilityOf(avatar));
         loginButton = getDriver().findElement(By.cssSelector("button[type='submit']"));
         Assert.assertTrue(avatar.isDisplayed());
         Assert.assertFalse(loginButton.isDisplayed());
@@ -37,7 +37,7 @@ public class LoginTests extends BaseTest {
         provideEmail(email);
         providePassword(password);
         clickToElement(loginButton);
-        Thread.sleep(5000);
+        wait.until(ExpectedConditions.visibilityOf(loginButton));
         Assert.assertTrue(loginButton.isDisplayed());
     }
 }
