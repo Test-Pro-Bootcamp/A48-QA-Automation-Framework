@@ -75,6 +75,7 @@ public abstract class BaseTest {
         sendKeyToElement(passwordField, password);
     }
 
+    //обрабатываем ошибку NoSuchElementException для корректной работы ассерта
     public boolean isDisplayed(By locator) {
         try {
             driver.findElement(locator);

@@ -1,8 +1,6 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -26,7 +24,6 @@ public class Test19 extends BaseTest {
         clickToElement(deleteSongButton);
         WebElement successNotify = driver.findElement(By.cssSelector("div[class='success show']"));
         Assert.assertTrue(successNotify.isDisplayed());
-        Thread.sleep(3000);
         driver.navigate().refresh();
         Assert.assertFalse(isDisplayed(By.xpath("//a[text()='test1']")));
     }
