@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 public class LoginTests extends BaseTest {
     @Test
     @Parameters({"qaUrl"})
-    public void loginEmailPasswordTest(String qaUrl) throws InterruptedException {
+    public void loginEmailPasswordTest(String qaUrl) {
         provideEmail("demo@class.com");
         providePassword("te$t$tudent");
         WebElement loginButton = getDriver().findElement(By.cssSelector("button[type='submit']"));
@@ -31,7 +31,7 @@ public class LoginTests extends BaseTest {
 //    }
 
     @Test(dataProvider = "incorrectCredentials", dataProviderClass = DataProviderClass.class)
-    public void loginWithIncorrectCredentials(String email, String password) throws InterruptedException {
+    public void loginWithIncorrectCredentials(String email, String password) {
 
         WebElement loginButton = getDriver().findElement(By.cssSelector("button[type='submit']"));
         provideEmail(email);
