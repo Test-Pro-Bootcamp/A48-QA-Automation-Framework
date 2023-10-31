@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 
 public class Test19 extends BaseTest {
     @Test
-    public void deletePlaylist() throws InterruptedException {
+    public void deletePlaylist() {
         WebElement loginButton = driver.findElement(By.cssSelector("[type='submit']"));
         provideEmail("iana.kocharian@testpro.io");
         providePassword("CwqOPgQw");
