@@ -13,6 +13,7 @@
             <!--                </methods>-->
             <!--            </class>-->
             <class name="BaseTest"/>
+            <class name="RenamePlaylist"/>
             <!--            <class name="Homework17"/>-->
             <class name="Test19"/>
             <!--            <class name="DataProviderClass"/>-->

@@ -20,15 +20,15 @@ public class LoginTests extends BaseTest {
         Assert.assertFalse(loginButton.isDisplayed());
     }
 
-//    @Test
-//    public void loginWithNotExistEmailTest(String qaUrl) throws InterruptedException {
-//        provideEmail("notExist@class.com");
-//        providePassword("te$t$tudent");
-//        WebElement loginButton = getDriver().findElement(By.cssSelector("button[type='submit']"));
-//        clickToElement(loginButton);
-//        Thread.sleep(5000);
-//        Assert.assertTrue(loginButton.isDisplayed());
-//    }
+    @Test
+    public void loginWithNotExistEmailTest(String qaUrl) {
+        provideEmail("notExist@class.com");
+        providePassword("te$t$tudent");
+        WebElement loginButton = getDriver().findElement(By.cssSelector("button[type='submit']"));
+        clickToElement(loginButton);
+        wait.until(ExpectedConditions.visibilityOf(loginButton));
+        Assert.assertTrue(loginButton.isDisplayed());
+    }
 
     @Test(dataProvider = "incorrectCredentials", dataProviderClass = DataProviderClass.class)
     public void loginWithIncorrectCredentials(String email, String password) {
